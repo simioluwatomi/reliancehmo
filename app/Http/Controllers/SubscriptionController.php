@@ -64,6 +64,11 @@ class SubscriptionController extends Controller
             );
         }
 
+        $user->update([
+            'authorization_code' => $paymentDetails['data']['authorization']['authorization_code'],
+            'payment_date' => now()
+        ]);
+
         Subscription::create([
             'user_id'     => $user->id,
             'amount'      => $paymentDetails['data']['amount'],
