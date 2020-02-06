@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('{user}/subscription', 'SubscriptionController@create')->name('subscription.create')->middleware('auth');
+
+Route::post('{user}/subscription', 'SubscriptionController@store')->name('subscription.pay')->middleware('auth');
+
+Route::get('/payment/callback', 'SubscriptionController@handleGatewayCallback');
